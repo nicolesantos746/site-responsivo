@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Aluguel de Carros de Luxo</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-image: url("./imagens/fundo6.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: #000000;
+        }
+
+        .navbar {
+            background-color: #9e1d1d !important;
+        }
+
+        .form-container {
+            background-color: #8f8a8a;
+            padding: 25px;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(255, 250, 250, 0.8);
+        }
+
+        .form-container label {
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
+        }
+
+        .form-container input, .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-container input[readonly] {
+            background-color: #eee;
+        }
+
+        .form-container button {
+            margin-top: 20px;
+            padding: 12px;
+            width: 100%;
+            background-color: #9b9b9b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: #111;
+            color: #fff;
+            text-align: center;
+            padding: 20px 10px;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+
+        .footer-container a {
+            color: #00bfff;
+            text-decoration: none;
+        }
+
+        .footer-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de Navegação -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="index.html">ELITE CARS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="contatos.html">CONTATOS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sobrenos.html">SOBRE NÓS</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">NOVIDADES</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Modelos disponíveis</a></li>
+                            <li><a class="dropdown-item" href="#">Feedback</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Pesquisar">
+                    <button class="btn btn-outline-danger" type="submit">Pesquisar</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Formulário de Aluguel -->
+    <div class="form-container">
+        <form action="/processar-aluguel" method="post">
+            <h2>Aluguel de Carro de Luxo</h2>
+
+            <label for="nome">Nome Completo:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="telefone">Telefone:</label>
+            <input type="tel" id="telefone" name="telefone" required>
+
+            <label for="carro">Escolha o Carro:</label>
+            <select id="carro" name="carro" onchange="atualizarValor()" required>
+                <option value="">-- Selecione --</option>
+                <option value="Porsche 911 GT3">Porsche 911 GT3</option>
+                <option value="Lamborghini Huracán Performante">Lamborghini Huracán Performante</option>
+                <option value="Mercedes-AMG GT R">Mercedes-AMG GT R</option>
+            </select>
+
+            <label for="valor">Valor do Aluguel Diário (R$):</label>
+            <input type="text" id="valor" name="valor" readonly>
+
+            <button type="submit">Enviar Solicitação</button>
+        </form>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2025 Locadora de Carros de Luxo. Todos os direitos reservados.</p>
+            <p>Contato: <a href="mailto:ELITECARS@GMAIL.COM">ELITECARS@GMAIL.COM</a> | (61) 982577122</p>
+            <p>Nossas redes sociais:</p>
+            <p><i class="fab fa-instagram"></i> Instagram: @ELITECARS_OFICIAL</p>
+            <p><i class="fab fa-facebook"></i> Facebook: Elite Carros</p>
+        </div>
+    </footer>
+
+    <!-- Scripts Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+  
+    <script>
+        function atualizarValor() {
+            const carro = document.getElementById("carro").value;
+            const valorInput = document.getElementById("valor");
+
+            let valores = {
+                "Porsche 911 GT3": "R$ 32.000",
+                "Lamborghini Huracán Performante": "R$ 20.000",
+                "Mercedes-AMG GT R": "R$ 17.000"
+            };
+
+          
+            valorInput.value = valores[carro] || "";
+        }
+    </script>
+
+</body>
+</html>
